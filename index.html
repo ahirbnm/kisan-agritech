@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Store</title>
+<title>Kisan Agri Store</title>
 <style>
 body{
   margin:0;
@@ -28,8 +28,11 @@ header{
   font-size:20px;
   font-weight:bold;
 }
-.search-bar{
+.search-container{
   flex:1;
+  position:relative;
+}
+.search-bar{
   display:flex;
 }
 .search-bar input{
@@ -44,6 +47,31 @@ header{
   background:#febd69;
   cursor:pointer;
   border-radius:0 4px 4px 0;
+}
+.suggestions{
+  position:absolute;
+  top:38px;
+  left:0;
+  right:0;
+  background:white;
+  color:black;
+  border-radius:5px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+  z-index:10;
+}
+.suggestions div{
+  padding:8px;
+  cursor:pointer;
+}
+.suggestions div:hover{
+  background:#eee;
+}
+.cart{
+  background:#ff9900;
+  padding:8px 12px;
+  border-radius:5px;
+  font-weight:bold;
+  color:white;
 }
 .container{
   display:grid;
@@ -64,71 +92,101 @@ header{
   object-fit:cover;
   border-radius:8px;
 }
-.product h3{
-  margin:10px 0 5px;
-}
-.product a{
-  display:inline-block;
+.product button{
   margin-top:8px;
   padding:6px 10px;
   background:#ff9900;
+  border:none;
   color:white;
-  text-decoration:none;
   border-radius:5px;
+  cursor:pointer;
 }
 </style>
 </head>
 <body>
 
 <header>
-  <!-- LOGO (replace src with your logo file) -->
   <img src="logo.png" class="logo" alt="Logo">
+  <div class="store-name">Kisan Agri Store</div>
 
-  <div class="store-name">My Web Store</div>
-
-  <div class="search-bar">
-    <input type="text" id="searchBox" placeholder="Search products..." />
-    <button onclick="searchProduct()">Search</button>
+  <div class="search-container">
+    <div class="search-bar">
+      <input type="text" id="searchBox" onkeyup="showSuggestions()" placeholder="Search products..." />
+      <button onclick="searchProduct()">Search</button>
+    </div>
+    <div id="suggestions" class="suggestions"></div>
   </div>
+
+  <div class="cart">Cart: <span id="cartCount">0</span></div>
 </header>
 
 <div class="container" id="productList">
 
-  <div class="product">
-    <img src="images/lunchbox.jpg" alt="Lunch Box">
+  <div class="product" data-name="lunch box">
+    <img src="images/lunchbox.jpg">
     <h3>Lunch Box</h3>
-    <a href="#">Buy Now</a>
+    <button onclick="addToCart()">Add to Cart</button>
   </div>
 
-  <div class="product">
-    <img src="images/bag.jpg" alt="Bag">
+  <div class="product" data-name="bag">
+    <img src="images/bag.jpg">
     <h3>School Bag</h3>
-    <a href="#">Buy Now</a>
+    <button onclick="addToCart()">Add to Cart</button>
   </div>
 
-  <div class="product">
-    <img src="images/mosquito.jpg" alt="Mosquito Killer">
+  <div class="product" data-name="mosquito racket">
+    <img src="images/mosquito.jpg">
     <h3>Electric Mosquito Racket</h3>
-    <a href="#">Buy Now</a>
+    <button onclick="addToCart()">Add to Cart</button>
   </div>
 
-  <div class="product">
-    <img src="images/khurpi.jpg" alt="Khurpi">
+  <div class="product" data-name="khurpi">
+    <img src="images/khurpi.jpg">
     <h3>Khurpi (Garden Tool)</h3>
-    <a href="#">Buy Now</a>
+    <button onclick="addToCart()">Add to Cart</button>
   </div>
 
 </div>
 
 <script>
-function searchProduct() {
+let cart = 0;
+
+function addToCart(){
+  cart++;
+  document.getElementById("cartCount").innerText = cart;
+}
+
+function searchProduct(){
   let input = document.getElementById("searchBox").value.toLowerCase();
   let products = document.getElementsByClassName("product");
 
-  for (let i = 0; i < products.length; i++) {
-    let text = products[i].innerText.toLowerCase();
-    products[i].style.display = text.includes(input) ? "block" : "none";
+  for(let i=0;i<products.length;i++){
+    let name = products[i].getAttribute("data-name");
+    products[i].style.display = name.includes(input) ? "block" : "none";
   }
+  document.getElementById("suggestions").innerHTML = "";
+}
+
+function showSuggestions(){
+  let input = document.getElementById("searchBox").value.toLowerCase();
+  let suggestionsBox = document.getElementById("suggestions");
+  let items = ["lunch box","bag","mosquito racket","khurpi"];
+
+  suggestionsBox.innerHTML = "";
+
+  if(input === "") return;
+
+  items.forEach(item => {
+    if(item.includes(input)){
+      let div = document.createElement("div");
+      div.innerText = item;
+      div.onclick = function(){
+        document.getElementById("searchBox").value = item;
+        suggestionsBox.innerHTML = "";
+      }
+      suggestionsBox.appendChild(div);
+    }
+  });
 }
 </script>
 
