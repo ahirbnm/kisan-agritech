@@ -10,37 +10,56 @@ body{
   font-family:Arial, sans-serif;
   background:#f4f4f4;
 }
+
+/* HEADER */
 header{
   background:#131921;
   color:white;
   display:flex;
   align-items:center;
   padding:10px 15px;
-  gap:15px;
+  gap:12px;
+  position:relative;
 }
+
+/* MENU ICON */
+.menu-icon{
+  font-size:26px;
+  cursor:pointer;
+  padding:5px 10px;
+  background:#232f3e;
+  border-radius:5px;
+}
+
 .logo{
-  width:50px;
-  height:50px;
+  width:45px;
+  height:45px;
   border-radius:8px;
   object-fit:cover;
 }
+
 .store-name{
-  font-size:20px;
+  font-size:18px;
   font-weight:bold;
+  white-space:nowrap;
 }
+
 .search-container{
   flex:1;
   position:relative;
 }
+
 .search-bar{
   display:flex;
 }
+
 .search-bar input{
   width:100%;
   padding:8px;
   border:none;
   border-radius:4px 0 0 4px;
 }
+
 .search-bar button{
   padding:8px 12px;
   border:none;
@@ -48,6 +67,7 @@ header{
   cursor:pointer;
   border-radius:0 4px 4px 0;
 }
+
 .suggestions{
   position:absolute;
   top:38px;
@@ -59,26 +79,71 @@ header{
   box-shadow:0 2px 6px rgba(0,0,0,0.2);
   z-index:10;
 }
+
 .suggestions div{
   padding:8px;
   cursor:pointer;
 }
+
 .suggestions div:hover{
   background:#eee;
 }
+
 .cart{
   background:#ff9900;
   padding:8px 12px;
   border-radius:5px;
   font-weight:bold;
   color:white;
+  white-space:nowrap;
 }
+
+/* SIDEBAR */
+.sidebar{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:250px;
+  height:100%;
+  background:#232f3e;
+  color:white;
+  padding:15px;
+  transition:0.3s;
+  z-index:999;
+}
+
+.sidebar h3{
+  margin-top:10px;
+  border-bottom:1px solid #444;
+  padding-bottom:5px;
+}
+
+.sidebar ul{
+  list-style:none;
+  padding:0;
+}
+
+.sidebar ul li{
+  padding:8px 0;
+  cursor:pointer;
+  border-bottom:1px solid #333;
+}
+
+.sidebar ul li:hover{
+  color:#febd69;
+}
+
+.sidebar.active{
+  left:0;
+}
+
 .container{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
   gap:15px;
   padding:20px;
 }
+
 .product{
   background:white;
   padding:10px;
@@ -86,12 +151,14 @@ header{
   box-shadow:0 2px 5px rgba(0,0,0,0.1);
   text-align:center;
 }
+
 .product img{
   width:100%;
   height:150px;
   object-fit:cover;
   border-radius:8px;
 }
+
 .product button{
   margin-top:8px;
   padding:6px 10px;
@@ -105,8 +172,29 @@ header{
 </head>
 <body>
 
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <h3>🔥 Most Searched</h3>
+  <ul>
+    <li>Lunch Box</li>
+    <li>Bag</li>
+    <li>Khurpi</li>
+    <li>Mosquito Racket</li>
+  </ul>
+
+  <h3>⭐ Most Bought</h3>
+  <ul>
+    <li>Lunch Box</li>
+    <li>School Bag</li>
+    <li>Khurpi Tool</li>
+  </ul>
+</div>
+
 <header>
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
   <img src="logo.png" class="logo" alt="Logo">
+
   <div class="store-name">Kisan Agri Store</div>
 
   <div class="search-container">
@@ -136,7 +224,7 @@ header{
 
   <div class="product" data-name="mosquito racket">
     <img src="images/mosquito.jpg">
-    <h3>Electric Mosquito Racket</h3>
+    <h3>Mosquito Racket</h3>
     <button onclick="addToCart()">Add to Cart</button>
   </div>
 
@@ -154,6 +242,10 @@ let cart = 0;
 function addToCart(){
   cart++;
   document.getElementById("cartCount").innerText = cart;
+}
+
+function toggleMenu(){
+  document.getElementById("sidebar").classList.toggle("active");
 }
 
 function searchProduct(){
@@ -192,3 +284,4 @@ function showSuggestions(){
 
 </body>
 </html>
+
