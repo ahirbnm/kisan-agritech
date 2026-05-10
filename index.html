@@ -1,132 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>My Shop</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Store</title>
 <style>
 body{
-  font-family: Arial;
   margin:0;
-  background:#f3f3f3;
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
 }
-
-/* HEADER */
 header{
-  background:#232f3e;
+  background:#131921;
   color:white;
-  padding:15px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  padding:10px 15px;
+  gap:15px;
 }
-
-/* CART BOX */
-#cartBox{
-  background:#ff9900;
-  padding:8px 15px;
-  border-radius:6px;
+.logo{
+  width:50px;
+  height:50px;
+  border-radius:8px;
+  object-fit:cover;
+}
+.store-name{
+  font-size:20px;
   font-weight:bold;
-  color:black;
 }
-
-/* PRODUCT GRID */
-.container{
+.search-bar{
+  flex:1;
   display:flex;
-  justify-content:center;
+}
+.search-bar input{
+  width:100%;
+  padding:8px;
+  border:none;
+  border-radius:4px 0 0 4px;
+}
+.search-bar button{
+  padding:8px 12px;
+  border:none;
+  background:#febd69;
+  cursor:pointer;
+  border-radius:0 4px 4px 0;
+}
+.container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:15px;
   padding:20px;
 }
-
-/* PRODUCT CARD */
-.product-card{
-  width:320px;
+.product{
   background:white;
-  padding:15px;
+  padding:10px;
   border-radius:10px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  text-align:center;
 }
-
-.product-card img{
+.product img{
   width:100%;
-  border-radius:10px;
+  height:150px;
+  object-fit:cover;
+  border-radius:8px;
 }
-
-.buy-btn{
-  display:block;
+.product h3{
+  margin:10px 0 5px;
+}
+.product a{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 10px;
   background:#ff9900;
   color:white;
-  text-align:center;
-  padding:10px;
-  margin-top:10px;
-  border-radius:6px;
   text-decoration:none;
-  font-weight:bold;
-}
-
-button{
-  width:100%;
-  margin-top:8px;
-  padding:10px;
-  border:none;
-  background:#232f3e;
-  color:white;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#1a2533;
+  border-radius:5px;
 }
 </style>
-
 </head>
-
 <body>
 
 <header>
-  <h2>My Amazon Style Shop</h2>
+  <!-- LOGO (replace src with your logo file) -->
+  <img src="logo.png" class="logo" alt="Logo">
 
-  <div id="cartBox">
-    🛒 Cart: <span id="cartCount">0</span>
+  <div class="store-name">My Web Store</div>
+
+  <div class="search-bar">
+    <input type="text" id="searchBox" placeholder="Search products..." />
+    <button onclick="searchProduct()">Search</button>
   </div>
 </header>
 
-<div class="container">
+<div class="container" id="productList">
 
-  <!-- PRODUCT CARD -->
-  <div class="product-card">
+  <div class="product">
+    <img src="images/lunchbox.jpg" alt="Lunch Box">
+    <h3>Lunch Box</h3>
+    <a href="#">Buy Now</a>
+  </div>
 
-    <!-- तुम्हारी image -->
-    <img src="file_00000000ab7c720894e44c6960f8347d" alt="Lunch Box">
+  <div class="product">
+    <img src="images/bag.jpg" alt="Bag">
+    <h3>School Bag</h3>
+    <a href="#">Buy Now</a>
+  </div>
 
-    <h2>Premium Lunch Box</h2>
+  <div class="product">
+    <img src="images/mosquito.jpg" alt="Mosquito Killer">
+    <h3>Electric Mosquito Racket</h3>
+    <a href="#">Buy Now</a>
+  </div>
 
-    <p>
-      Stainless steel lunch box with leak-proof design. Perfect for office, school and travel.
-    </p>
-
-    <h3>₹499</h3>
-
-    <!-- AMAZON BUY BUTTON -->
-    <a href="https://www.amazon.in/your-product-link" target="_blank" class="buy-btn">
-      Buy Now on Amazon
-    </a>
-
-    <!-- ADD TO CART -->
-    <button onclick="addToCart()">
-      Add to Cart
-    </button>
-
+  <div class="product">
+    <img src="images/khurpi.jpg" alt="Khurpi">
+    <h3>Khurpi (Garden Tool)</h3>
+    <a href="#">Buy Now</a>
   </div>
 
 </div>
 
 <script>
-let cart = 0;
+function searchProduct() {
+  let input = document.getElementById("searchBox").value.toLowerCase();
+  let products = document.getElementsByClassName("product");
 
-function addToCart(){
-  cart++;
-  document.getElementById("cartCount").innerText = cart;
+  for (let i = 0; i < products.length; i++) {
+    let text = products[i].innerText.toLowerCase();
+    products[i].style.display = text.includes(input) ? "block" : "none";
+  }
 }
 </script>
 
