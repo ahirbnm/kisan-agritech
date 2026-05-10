@@ -1,81 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Kisan AgriTech</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>My Shop</title>
+
+<style>
+body{
+  font-family: Arial;
+  margin:0;
+  background:#f3f3f3;
+}
+
+/* HEADER */
+header{
+  background:#232f3e;
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* CART BOX */
+#cartBox{
+  background:#ff9900;
+  padding:8px 15px;
+  border-radius:6px;
+  font-weight:bold;
+  color:black;
+}
+
+/* PRODUCT GRID */
+.container{
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
+
+/* PRODUCT CARD */
+.product-card{
+  width:320px;
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.product-card img{
+  width:100%;
+  border-radius:10px;
+}
+
+.buy-btn{
+  display:block;
+  background:#ff9900;
+  color:white;
+  text-align:center;
+  padding:10px;
+  margin-top:10px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+button{
+  width:100%;
+  margin-top:8px;
+  padding:10px;
+  border:none;
+  background:#232f3e;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1a2533;
+}
+</style>
+
 </head>
 
 <body>
 
 <header>
-  <h1>🌾 Kisan AgriTech</h1>
-  <p>Farmers Trusted eCommerce Platform</p>
+  <h2>My Amazon Style Shop</h2>
+
+  <div id="cartBox">
+    🛒 Cart: <span id="cartCount">0</span>
+  </div>
 </header>
 
-<nav>
-  <a href="#">Home</a>
-  <a href="#">Products</a>
-  <a href="#">Contact</a>
-</nav>
+<div class="container">
 
-<!-- HERO SECTION -->
-<section class="hero">
-  <h2>Buy Quality Farming Products Online</h2>
-  <p>Seeds | Pesticides | Fertilizers | Tools</p>
-  <button>Shop Now</button>
-</section>
+  <!-- PRODUCT CARD -->
+  <div class="product-card">
 
-<!-- PRODUCTS -->
-<section class="products">
+    <!-- तुम्हारी image -->
+    <img src="file_00000000ab7c720894e44c6960f8347d" alt="Lunch Box">
 
-  <div class="card">
-    <h3>🌱 Seeds</h3>
-    <p>High quality hybrid seeds</p>
-    <a class="btn" 
-       href="https://wa.me/91XXXXXXXXXX?text=I want to buy Seeds from Kisan AgriTech"
-       target="_blank">
-       Buy Now
+    <h2>Premium Lunch Box</h2>
+
+    <p>
+      Stainless steel lunch box with leak-proof design. Perfect for office, school and travel.
+    </p>
+
+    <h3>₹499</h3>
+
+    <!-- AMAZON BUY BUTTON -->
+    <a href="https://www.amazon.in/your-product-link" target="_blank" class="buy-btn">
+      Buy Now on Amazon
     </a>
+
+    <!-- ADD TO CART -->
+    <button onclick="addToCart()">
+      Add to Cart
+    </button>
+
   </div>
 
-  <div class="card">
-    <h3>🧪 Pesticides</h3>
-    <p>Safe & effective crop protection</p>
-    <a class="btn" 
-       href="https://wa.me/91XXXXXXXXXX?text=I want to buy Pesticides"
-       target="_blank">
-       Buy Now
-    </a>
-  </div>
+</div>
 
-  <div class="card">
-    <h3>🌾 Fertilizers</h3>
-    <p>Organic & chemical fertilizers</p>
-    <a class="btn" 
-       href="https://wa.me/91XXXXXXXXXX?text=I want to buy Fertilizers"
-       target="_blank">
-       Buy Now
-    </a>
-  </div>
+<script>
+let cart = 0;
 
-  <div class="card">
-    <h3>🚜 Farming Tools</h3>
-    <p>Best quality agriculture tools</p>
-    <a class="btn" 
-       href="https://wa.me/91XXXXXXXXXX?text=I want to buy Farming Tools"
-       target="_blank">
-       Buy Now
-    </a>
-  </div>
-
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 Kisan AgriTech | All Rights Reserved</p>
-  <p>Contact: +91 XXXXXXXXXX</p>
-</footer>
+function addToCart(){
+  cart++;
+  document.getElementById("cartCount").innerText = cart;
+}
+</script>
 
 </body>
 </html>
